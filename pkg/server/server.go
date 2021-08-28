@@ -45,3 +45,12 @@ func New(logger *log.Logger, addr string) *Server {
 
 	return s
 }
+
+func (s *Server) Start() error {
+	return s.srv.ListenAndServe()
+}
+
+func (s *Server) Stop(ctx context.Context) error {
+	s.log.Println("Shutting down...")
+	return s.srv.Shutdown(ctx)
+}
